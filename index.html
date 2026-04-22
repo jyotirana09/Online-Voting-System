@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>निर्वाचन आयोग, नेपाल | NepalVote - Digital Democracy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>Election Commission Nepal | Digital Voting Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -15,766 +15,508 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #fcf6e8 0%, #f0ebdd 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1.5rem;
-            position: relative;
-        }
-        /* Nepal flag inspired accent */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #dc143c 0%, #dc143c 45%, #003893 45%, #003893 100%);
-            z-index: 1000;
-        }
-        .voting-container {
-            max-width: 1350px;
-            width: 100%;
-            background: rgba(255, 252, 240, 0.92);
-            backdrop-filter: blur(2px);
-            border-radius: 2.5rem;
-            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25), 0 4px 14px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border: 1px solid rgba(220,20,60,0.15);
+            background: #0a1a2a;
+            color: #1e2a3e;
+            overflow-x: hidden;
         }
 
-        .header {
-            background: #ffffffdd;
-            padding: 1.2rem 2rem;
-            border-bottom: 1px solid #ffe6c7;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            backdrop-filter: blur(4px);
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .logo-icon {
-            background: #b22234;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1.2rem;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 6px 12px -6px rgba(0,0,0,0.2);
-        }
-
-        .logo-text h1 {
-            font-size: 1.7rem;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #003893, #b22234);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .logo-text span {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #b45f2b;
-            letter-spacing: 0.5px;
-        }
-
-        .badge {
-            background: #fdf5e6;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #8b3c1c;
-            border: 1px solid #dcb572;
-        }
-
-        .voter-panel {
-            background: white;
-            margin: 1.5rem 2rem 0 2rem;
-            border-radius: 1.8rem;
-            padding: 1rem 1.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            border: 1px solid #f0e2cc;
-        }
-
-        .voter-greeting {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .voter-greeting i {
-            font-size: 1.8rem;
-            color: #c0392b;
-        }
-
-        .voter-greeting h3 {
-            font-weight: 700;
-            color: #2c3e2f;
-        }
-
-        .voter-id-badge {
-            background: #fef1e0;
-            padding: 0.4rem 1.2rem;
-            border-radius: 2rem;
-            font-family: monospace;
-            font-weight: 600;
-            color: #a55117;
-            font-size: 0.8rem;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 0.9fr;
-            gap: 1.8rem;
-            padding: 1.5rem 2rem 2rem 2rem;
-        }
-
-        @media (max-width: 850px) {
-            .content-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .voter-panel { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .header { flex-direction: column; text-align: center; }
-        }
-
-        .candidates-card, .results-card {
-            background: white;
-            border-radius: 1.8rem;
-            padding: 1.5rem;
-            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.08);
-            border: 1px solid #fae6cf;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #7a2e1a;
-            border-left: 5px solid #dc143c;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .candidates-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .candidate-item {
-            background: #fefcf8;
-            border-radius: 1.2rem;
-            padding: 1rem 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            transition: all 0.2s;
-            border: 1px solid #f2e0cc;
-        }
-
-        .candidate-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .candidate-avatar {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(145deg, #ffebd2, #ffddbb);
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #b64926;
-        }
-
-        .candidate-details h4 {
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #522e1a;
-        }
-        .candidate-details p {
-            font-size: 0.7rem;
-            color: #9b6a42;
-            margin-top: 4px;
-        }
-
-        .vote-btn {
-            background: #ffffff;
-            border: 1.5px solid #dbba95;
-            padding: 0.6rem 1.4rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #b64926;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .vote-btn:hover:not(:disabled) {
-            background: #dc143c;
-            border-color: #dc143c;
-            color: white;
-            transform: scale(1.02);
-        }
-        .vote-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .voted-badge {
-            background: #e3f5ec;
-            color: #1f6e43;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding: 0.4rem 0;
-            border-bottom: 1px solid #f3e5d2;
-        }
-        .stat-name { font-weight: 600; color: #5c371d; width: 38%; }
-        .progress-bar-bg {
-            flex: 1;
-            background: #f3e6d8;
-            border-radius: 30px;
-            height: 10px;
-            margin: 0 12px;
-            overflow: hidden;
-        }
-        .progress-fill { background: #dc143c; width: 0%; height: 100%; border-radius: 30px; transition: width 0.4s; }
-        .stat-votes { font-weight: 700; color: #a0411c; min-width: 65px; text-align: right; }
-        .total-votes {
-            margin-top: 1.5rem;
-            background: #fef5e9;
-            border-radius: 1.2rem;
-            padding: 0.9rem;
-            text-align: center;
-            font-weight: 600;
-            color: #8b3a1c;
-        }
-        .reset-btn, .logout-btn {
-            background: none;
-            border: none;
-            color: #b97f51;
-            cursor: pointer;
-            font-size: 0.75rem;
-            margin-top: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-            margin-right: 12px;
-        }
-        .reset-btn:hover { color: #dc143c; }
-        .logout-btn:hover { color: #2c6e2f; }
-        .admin-panel {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #f2e0cc;
-            font-size: 0.7rem;
-            text-align: center;
-            color: #ad8b67;
-        }
-        .notification {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #1f3b2c;
-            color: white;
-            padding: 0.9rem 1.5rem;
-            border-radius: 60px;
-            font-weight: 500;
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            transform: translateY(120%);
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .notification.show { transform: translateY(0); }
-        .registration-modal {
+        /* Fullscreen background image with overlay and parallax effect */
+        .bg-hero {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.75), rgba(100, 30, 30, 0.65)), 
+                        url('https://images.pexels.com/photos/2580837/pexels-photo-2580837.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+
+        /* Animated particles overlay (tiny details) */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 215, 150, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Glassmorphism navbar */
+        .navbar {
+            background: rgba(255, 255, 245, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(220, 20, 60, 0.3);
+            transition: all 0.3s;
+        }
+        .logo h2 {
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e466e, #b22234);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2c3e4e;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b22234;
+            transition: width 0.25s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: #b22234; }
+        .btn-outline-sm {
+            background: transparent;
+            border: 1.5px solid #b22234;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-outline-sm:hover { background: #b22234; color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 80px;
+            animation: fadeSlideUp 0.6s ease-out;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero card */
+        .hero {
+            background: rgba(255, 252, 240, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 150, 0.6);
+            transition: transform 0.3s;
+        }
+        .hero:hover { transform: scale(1.01); }
+        .hero h1 { font-size: 2.6rem; font-weight: 800; color: #2c3e2f; }
+        .hero h1 i { color: #b22234; }
+        .hero p { font-size: 1.1rem; max-width: 700px; margin: 1rem auto; color: #2c4b5e; }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem 1.8rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+            border: 1px solid #f0e0cc;
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
+
+        .glass-card {
+            background: rgba(255, 252, 245, 0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,240,0.6);
+            transition: all 0.3s;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #b22234;
+            padding-left: 1rem;
+            background: linear-gradient(135deg, #3a2c1f, #9e3c1c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .candidates-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .candidate-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 250, 0.9);
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            transition: all 0.25s;
+            border: 1px solid #f0e2cf;
+        }
+        .candidate-row:hover {
+            transform: translateX(8px);
+            background: white;
+            border-color: #b22234;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .vote-btn {
+            background: #b22234;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 2rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .vote-btn:disabled { background: #b0a088; cursor: not-allowed; opacity: 0.7; }
+        .vote-btn:hover:not(:disabled) { background: #8b1a2a; transform: scale(1.02); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+
+        .progress-bg { background: #e2dcd2; border-radius: 20px; height: 12px; overflow: hidden; margin: 0.5rem 0; }
+        .progress-fill { background: linear-gradient(90deg, #b22234, #e67e22); width: 0%; height: 100%; border-radius: 20px; transition: width 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+
+        .admin-table { overflow-x: auto; }
+        .btn-icon { background: none; border: none; cursor: pointer; font-size: 1.2rem; margin: 0 4px; transition: 0.1s; }
+        .btn-icon:hover { transform: scale(1.1); }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
+            animation: fadeModal 0.2s;
         }
+        @keyframes fadeModal { from { opacity: 0; } to { opacity: 1; } }
         .modal-content {
-            background: #fffaf2;
-            border-radius: 2rem;
-            padding: 2rem;
-            max-width: 420px;
+            background: #fffcf5;
+            max-width: 450px;
             width: 90%;
+            border-radius: 1.8rem;
+            padding: 2rem;
             text-align: center;
-            border-top: 6px solid #dc143c;
+            border-top: 6px solid #b22234;
+            animation: scaleUp 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .modal-content input {
+        @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content input, .modal-content select {
             width: 100%;
-            padding: 0.9rem;
-            margin: 0.7rem 0;
-            border: 2px solid #f0e0cd;
+            padding: 0.8rem;
+            margin: 0.6rem 0;
+            border: 1px solid #e0cfbc;
             border-radius: 1rem;
-            font-size: 0.95rem;
-            background: white;
+            transition: 0.2s;
         }
-        .modal-content button {
-            background: #b22234;
+        .modal-content input:focus { border-color: #b22234; outline: none; box-shadow: 0 0 0 2px rgba(178,34,52,0.2); }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1f3b2c;
             color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 2rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 8px;
+            padding: 0.8rem 1.6rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(150%);
+            transition: transform 0.3s;
+            z-index: 3000;
+            font-weight: 500;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.7rem;
-            color: #a77c54;
-            background: #fffbf0;
+        .toast.show { transform: translateY(0); }
+        footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,200,0.2); color: #ffe6cc; font-size: 0.8rem; }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; }
+            .hero h1 { font-size: 1.8rem; }
         }
-        .online-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #2e7d32;
-            border-radius: 50%;
-            margin-left: 8px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
-        .nid-hint { font-size: 0.7rem; color: #b97f51; margin-top: 5px; }
+        .voter-status { font-size: 0.9rem; margin-top: 8px; background: #fef1e0; display: inline-block; padding: 0.3rem 1rem; border-radius: 30px; }
+        .badge-success { background: #e2f3e4; color: #2a6b2f; padding: 0.2rem 0.8rem; border-radius: 20px; }
     </style>
 </head>
 <body>
-<div class="voting-container">
-    <div class="header">
-        <div class="logo-area">
-            <div class="logo-icon"><i class="fas fa-landmark"></i></div>
-            <div class="logo-text">
-                <h1>नेपाल निर्वाचन <span class="online-indicator"></span></h1>
-                <span>Election Commission Nepal • सुरक्षित मतदान</span>
-            </div>
-        </div>
-        <div class="badge"><i class="fas fa-shield-alt"></i> नागरिक प्रमाणीकरण | मत एक पटक</div>
-    </div>
+<div class="bg-hero"></div>
+<div class="particles" id="particlesContainer"></div>
 
-    <div class="voter-panel">
-        <div class="voter-greeting">
-            <i class="fas fa-id-card"></i>
-            <h3>मतदाता: <span id="voterName">परिचय छैन</span></h3>
-            <div class="voter-id-badge" id="voterIdDisplay"><i class="fas fa-fingerprint"></i> राष्ट्रिय परिचयपत्र ?</div>
-        </div>
-        <div id="voteStatusMsg" class="voted-badge"><i class="fas fa-info-circle"></i> दर्ता गर्नुहोस्</div>
-        <div><button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> नयाँ मतदाता / Logout</button></div>
+<div class="navbar">
+    <div class="logo"><h2><i class="fas fa-vote-yea"></i> NepalVote</h2></div>
+    <div class="nav-links">
+        <a class="nav-link" id="navHome">Home</a>
+        <a class="nav-link" id="navVote">Vote</a>
+        <a id="adminNavLink" style="display:none;">Admin Panel</a>
+        <span id="authButtons">
+            <button id="showLoginBtn" class="btn-outline-sm"><i class="fas fa-sign-in-alt"></i> Voter Login</button>
+            <button id="showRegisterBtn" class="btn-outline-sm"><i class="fas fa-user-plus"></i> Register</button>
+            <button id="showAdminLoginBtn" class="btn-outline-sm"><i class="fas fa-user-shield"></i> Admin</button>
+        </span>
+        <span id="userInfo" style="display:none;">
+            <span id="userNameDisplay"></span>
+            <button id="logoutBtn" class="btn-outline-sm"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </span>
     </div>
-
-    <div class="content-grid">
-        <div class="candidates-card">
-            <div class="section-title"><i class="fas fa-user-check"></i> उम्मेदवार छनौट गर्नुहोस् <span style="font-size:0.7rem;">एक व्यक्ति एक मत</span></div>
-            <div class="candidates-list" id="candidatesList">लोड हुँदै...</div>
-        </div>
-        <div class="results-card">
-            <div class="section-title"><i class="fas fa-chart-simple"></i> प्रत्यक्ष मत परिणाम (लाइभ)</div>
-            <div id="resultsLive">परिणाम लोड हुँदै...</div>
-            <div style="display: flex; justify-content: flex-end; gap: 8px;">
-                <button id="resetElectionBtn" class="reset-btn"><i class="fas fa-undo-alt"></i> पुन: स्थापित (प्रशासक)</button>
-            </div>
-            <div class="admin-panel"><i class="fas fa-key"></i> प्रशासक कुञ्जी: NepalElection2025</div>
-        </div>
-    </div>
-    <footer><i class="fas fa-lock"></i> नेपाल निर्वाचन आयोगको सिमुलेसन | एक राष्ट्रिय परिचयपत्र = एक मत | डाटा स्थानीय भण्डारण</footer>
 </div>
 
-<div id="registrationModal" class="registration-modal">
-    <div class="modal-content">
-        <i class="fas fa-vote-yea" style="font-size: 3rem; color:#b22234;"></i>
-        <h2 style="margin: 1rem 0;">निर्वाचनमा स्वागत छ</h2>
-        <p>राष्ट्रिय परिचयपत्र (NID) र पूरा नाम दर्ता गर्नुहोस्</p>
-        <input type="text" id="voterFullName" placeholder="पूरा नाम (जस्तै: हरि प्रसाद शर्मा)" maxlength="60">
-        <input type="text" id="nationalId" placeholder="राष्ट्रिय परिचयपत्र नं. (NID: १२ अंक / अद्वितीय)" maxlength="20">
-        <div class="nid-hint"><i class="fas fa-info-circle"></i> नेपाल सरकारको NID अनुकरण: अद्वितीय पहिचान आवश्यक छ</div>
-        <button id="registerBtn"><i class="fas fa-id-card"></i> मतदाता दर्ता गर्नुहोस्</button>
-    </div>
+<div class="container">
+    <section id="home">
+        <div class="hero">
+            <h1><i class="fas fa-landmark"></i> Election Commission Nepal · Digital Democracy</h1>
+            <p>Secure, transparent, and verifiable digital voting system. One citizen, one vote. Every voice shapes the nation.</p>
+            <div class="stats-grid" id="homeStats">
+                <div class="stat-card"><i class="fas fa-users"></i> <span id="totalVotersHome">0</span><br>Registered Voters</div>
+                <div class="stat-card"><i class="fas fa-check-circle"></i> <span id="totalVotesHome">0</span><br>Votes Cast</div>
+                <div class="stat-card"><i class="fas fa-chart-line"></i> <span id="leadingCandidateHome">—</span><br>Leading Candidate</div>
+            </div>
+            <button id="scrollToVoteBtn" class="vote-btn" style="background:#2c5a6e; margin-top:1rem;"><i class="fas fa-arrow-down"></i> Cast your vote</button>
+        </div>
+    </section>
+
+    <section id="vote-section">
+        <div class="glass-card">
+            <div class="section-title"><i class="fas fa-user-check"></i> Vote for your representative</div>
+            <div id="voterGreeting" class="voter-status"><i class="fas fa-id-card"></i> Not logged in. Please login to vote.</div>
+            <div id="candidatesContainer" class="candidates-grid">Loading candidates...</div>
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3><i class="fas fa-chart-simple"></i> Live Results</h3>
+                <div id="resultsArea"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="admin-section" style="display:none;">
+        <div class="glass-card">
+            <div class="section-title"><i class="fas fa-user-cog"></i> Administration Console</div>
+            <div id="adminControls">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                    <button id="addCandidateBtn" class="vote-btn" style="background:#2c6e2f;"><i class="fas fa-plus"></i> Add Candidate</button>
+                    <button id="resetElectionAdminBtn" class="vote-btn" style="background:#b97f51;"><i class="fas fa-trash-alt"></i> Reset Entire Election</button>
+                    <button id="changeAdminPasswordBtn" class="vote-btn" style="background:#4a5b6e;"><i class="fas fa-key"></i> Change Admin Password</button>
+                </div>
+                <div id="candidateManagementList"></div>
+            </div>
+            <div class="voter-status" style="margin-top:1rem; background:#e9e2d4;">
+                <i class="fas fa-code-branch"></i> Django Backend Ready: integrate with /api/ endpoints (JWT, REST)
+            </div>
+        </div>
+    </section>
 </div>
-<div id="notificationToast" class="notification"><i class="fas fa-ballot-check"></i> <span id="toastMessage">तपाईंको मत सुरक्षित रह्यो</span></div>
+
+<footer>
+    <i class="fas fa-lock"></i> Secure digital voting | One citizen one vote | Powered by Django-ready architecture
+</footer>
+
+<div id="toastMsg" class="toast"><i class="fas fa-info-circle"></i> <span id="toastText"></span></div>
+
+<!-- MODALS -->
+<div id="voterLoginModal" class="modal" style="display:none;"><div class="modal-content"><h3><i class="fas fa-sign-in-alt"></i> Voter Login</h3><input type="text" id="loginUsername" placeholder="Username"><input type="password" id="loginPassword" placeholder="Password"><div class="modal-buttons"><button id="confirmLoginBtn" class="vote-btn">Login</button><button id="cancelLoginBtn" class="btn-outline-sm">Cancel</button></div><p style="margin-top:1rem;"><a href="#" id="switchToRegister">No account? Register</a></p></div></div>
+<div id="voterRegisterModal" class="modal" style="display:none;"><div class="modal-content"><h3><i class="fas fa-user-plus"></i> Voter Registration</h3><input type="text" id="regFullName" placeholder="Full Name"><input type="text" id="regUsername" placeholder="Username (unique)"><input type="password" id="regPassword" placeholder="Password"><input type="text" id="regNationalId" placeholder="National ID (unique)"><div class="modal-buttons"><button id="confirmRegisterBtn" class="vote-btn">Register & Login</button><button id="cancelRegisterBtn" class="btn-outline-sm">Cancel</button></div></div></div>
+<div id="adminLoginModal" class="modal" style="display:none;"><div class="modal-content"><h3><i class="fas fa-user-shield"></i> Administrator Login</h3><input type="text" id="adminUsername" placeholder="Admin Username"><input type="password" id="adminPassword" placeholder="Password"><div class="modal-buttons"><button id="confirmAdminLoginBtn" class="vote-btn">Access Panel</button><button id="cancelAdminLoginBtn" class="btn-outline-sm">Cancel</button></div><p class="voter-status" style="margin-top:8px;">Default: admin / Admin@2025</p></div></div>
+<div id="addCandidateModal" class="modal" style="display:none;"><div class="modal-content"><h3>Add New Candidate</h3><input type="text" id="newCandName" placeholder="Full Name"><input type="text" id="newCandParty" placeholder="Party / Affiliation"><input type="text" id="newCandDesc" placeholder="Short bio / slogan"><div class="modal-buttons"><button id="saveNewCandidateBtn" class="vote-btn">Add Candidate</button><button id="cancelAddCandidateBtn" class="btn-outline-sm">Cancel</button></div></div></div>
 
 <script>
-    // ------------------- NEPAL VOTING SYSTEM WITH UNIQUE NATIONAL ID ------------------
-    // CANDIDATES (Major parties of Nepal)
-    const CANDIDATES = [
-        { id: 1, name: "केपी शर्मा ओली", party: "नेकपा (एमाले)", avatar: "KP", slogan: "समृद्ध नेपाल, सुखी नेपाली" },
-        { id: 2, name: "शेरबहादुर देउवा", party: "नेपाली कांग्रेस", avatar: "SD", slogan: "स्थिरता, विकास र लोकतन्त्र" },
-        { id: 3, name: "पुष्पकमल दाहाल", party: "माओवादी केन्द्र", avatar: "PD", slogan: "सामाजिक न्याय, समृद्धि" },
-        { id: 4, name: "रवि लामिछाने", party: "राष्ट्रिय स्वतन्त्र पार्टी", avatar: "RL", slogan: "सुशासन, विकास, दुरुपयोग अन्त्य" },
-        { id: 5, name: "उपेन्द्र यादव", party: "जनता समाजवादी पार्टी", avatar: "UY", slogan: "सङ्घीय लोकतन्त्र, सबैको अधिकार" }
-    ];
-
-    // Election data structure (persisted)
-    let electionState = {
-        votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
-        citizensRegistry: {},   // key: nationalId (unique) -> { voterId, fullName, hasVoted, votedCandidateId, registeredAt }
-        lastUpdated: new Date().toISOString()
+    // ======================== BACKEND SIMULATION (localStorage with Django API comments) ========================
+    // For Django integration, replace storage calls with fetch to REST endpoints:
+    // POST /api/register/, POST /api/login/, POST /api/vote/, GET /api/results/, POST /api/admin/candidates etc.
+    const STORAGE_KEY = "election_system_nepal_v3";
+    let electionData = {
+        admin: { username: "admin", passwordHash: btoa("Admin@2025") },
+        voters: {},
+        candidates: [
+            { id: "c1", name: "K.P. Sharma Oli", party: "CPN (UML)", description: "Economic prosperity & digital Nepal", avatar: "KO", votes: 0 },
+            { id: "c2", name: "Sher Bahadur Deuba", party: "Nepali Congress", description: "Stability, development & democracy", avatar: "SD", votes: 0 },
+            { id: "c3", name: "Puspa Kamal Dahal", party: "Maoist Centre", description: "Social justice & federalism", avatar: "PD", votes: 0 },
+            { id: "c4", name: "Rabi Lamichhane", party: "Rastriya Swatantra Party", description: "Anti-corruption & good governance", avatar: "RL", votes: 0 },
+            { id: "c5", name: "Upendra Yadav", party: "Janata Samajbadi Party", description: "Marginalized rights & federalism", avatar: "UY", votes: 0 }
+        ],
+        settings: { electionActive: true }
     };
+    let currentVoter = null;
+    let currentAdmin = false;
 
-    let currentSession = null;  // { nationalId, fullName, voterId, hasVoted, votedFor }
-
-    // ----- helper functions -----
-    function loadPersistedData() {
-        const saved = localStorage.getItem('nepal_election_secure');
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (parsed.votes && parsed.citizensRegistry) {
-                    electionState = parsed;
-                    // ensure votes for all candidates
-                    CANDIDATES.forEach(c => { if(electionState.votes[c.id] === undefined) electionState.votes[c.id] = 0; });
-                }
-            } catch(e) { console.warn(e); }
-        }
-        const savedSession = localStorage.getItem('nepal_voter_session');
-        if (savedSession) {
-            try {
-                const sess = JSON.parse(savedSession);
-                if (new Date(sess.expiresAt) > new Date()) {
-                    // validate that citizen still exists in registry and hasVoted flag aligns
-                    if (electionState.citizensRegistry[sess.nationalId]) {
-                        const citizen = electionState.citizensRegistry[sess.nationalId];
-                        currentSession = {
-                            nationalId: sess.nationalId,
-                            fullName: citizen.fullName,
-                            voterId: citizen.voterId,
-                            hasVoted: citizen.hasVoted,
-                            votedFor: citizen.votedCandidateId,
-                            expiresAt: sess.expiresAt
-                        };
-                    } else {
-                        currentSession = null;
-                        localStorage.removeItem('nepal_voter_session');
-                    }
-                } else {
-                    localStorage.removeItem('nepal_voter_session');
-                }
-            } catch(e) { currentSession = null; }
-        }
+    function loadData() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if(stored) { try { const p = JSON.parse(stored); electionData = p; if(!electionData.candidates) electionData.candidates = []; if(!electionData.voters) electionData.voters = {}; if(!electionData.admin) electionData.admin = { username: "admin", passwordHash: btoa("Admin@2025") }; } catch(e) {} }
+        else { saveData(); }
     }
+    function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(electionData)); }
+    function hashPassword(pwd) { return btoa(pwd); }
 
-    function persistElectionData() {
-        electionState.lastUpdated = new Date().toISOString();
-        localStorage.setItem('nepal_election_secure', JSON.stringify(electionState));
-    }
-
-    function persistSession() {
-        if (currentSession) {
-            const sessionToStore = {
-                nationalId: currentSession.nationalId,
-                fullName: currentSession.fullName,
-                voterId: currentSession.voterId,
-                hasVoted: currentSession.hasVoted,
-                votedFor: currentSession.votedFor,
-                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-            };
-            localStorage.setItem('nepal_voter_session', JSON.stringify(sessionToStore));
-        } else {
-            localStorage.removeItem('nepal_voter_session');
-        }
-    }
-
-    function generateVoterId() {
-        return "NEP-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-    }
-
-    function validateNid(nid) {
-        return nid && nid.trim().length >= 4 && /^[a-zA-Z0-9-]+$/.test(nid.trim());
-    }
-
-    // Registration with unique National ID
-    function registerVoter(fullName, nationalId) {
-        if (!fullName || fullName.trim().length < 3) throw new Error("कृपया पूरा नाम राख्नुहोस्");
-        if (!validateNid(nationalId)) throw new Error("मान्य राष्ट्रिय परिचयपत्र नं. राख्नुहोस् (कम्तीमा ४ अक्षर/अंक)");
-        const cleanNid = nationalId.trim().toUpperCase();
-        const existingCitizen = electionState.citizensRegistry[cleanNid];
-        if (existingCitizen && existingCitizen.hasVoted === true) {
-            throw new Error("यो NID बाट पहिले नै मत खसालिसकिएको छ । एक मतदाता एक मत ।");
-        }
-        // If already registered but not voted -> allow resume session
-        if (existingCitizen && existingCitizen.hasVoted === false) {
-            // resume existing registration
-            currentSession = {
-                nationalId: cleanNid,
-                fullName: existingCitizen.fullName,
-                voterId: existingCitizen.voterId,
-                hasVoted: false,
-                votedFor: null,
-                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-            };
-            persistSession();
-            updateUIForSession();
-            hideRegistrationModal();
-            showToast(`स्वागत छ ${existingCitizen.fullName}, तपाईं मतदानको लागि तयार हुनुहुन्छ।`, false);
-            return currentSession;
-        }
-        // new registration
-        const voterId = generateVoterId();
-        electionState.citizensRegistry[cleanNid] = {
-            voterId: voterId,
-            fullName: fullName.trim(),
-            hasVoted: false,
-            votedCandidateId: null,
-            registeredAt: new Date().toISOString()
-        };
-        persistElectionData();
-        currentSession = {
-            nationalId: cleanNid,
-            fullName: fullName.trim(),
-            voterId: voterId,
-            hasVoted: false,
-            votedFor: null,
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-        };
-        persistSession();
-        updateUIForSession();
-        hideRegistrationModal();
-        showToast(`धन्यवाद ${fullName} ! तपाईं सफलतापूर्वक दर्ता हुनुभयो । अब मतदान गर्न सक्नुहुन्छ।`, false);
-        return currentSession;
-    }
-
-    function castVote(candidateId) {
-        if (!currentSession) { showToast("कृपया पहिले दर्ता गर्नुहोस्", true); return false; }
-        if (currentSession.hasVoted) { showToast("तपाईंले पहिले नै मत दिइसक्नुभएको छ । धन्यवाद !", true); return false; }
-        const citizen = electionState.citizensRegistry[currentSession.nationalId];
-        if (!citizen || citizen.hasVoted) {
-            showToast("यो पहिचानले मत दिन सक्दैन । सम्पर्क गर्नुहोस्", true);
-            return false;
-        }
-        const candidate = CANDIDATES.find(c => c.id === candidateId);
-        if (!candidate) return false;
-        // record vote
-        electionState.votes[candidateId] = (electionState.votes[candidateId] || 0) + 1;
-        citizen.hasVoted = true;
-        citizen.votedCandidateId = candidateId;
-        currentSession.hasVoted = true;
-        currentSession.votedFor = candidateId;
-        persistElectionData();
-        persistSession();
-        renderCandidates();
-        renderResults();
-        updateUIForSession();
-        showToast(`✓ मत दिइयो: ${candidate.name} (${candidate.party}) । लोकतन्त्र सबल बन्दै`, false);
-        triggerConfettiNepal();
+    function registerVoter(username, password, fullName, nationalId) {
+        username = username.trim();
+        if(!username || !password || !fullName || !nationalId) throw new Error("All fields required");
+        if(electionData.voters[username]) throw new Error("Username already exists");
+        for(let u in electionData.voters) if(electionData.voters[u].nationalId === nationalId.trim()) throw new Error("National ID already registered");
+        electionData.voters[username] = { fullName: fullName.trim(), nationalId: nationalId.trim(), passwordHash: hashPassword(password), hasVoted: false, votedCandidateId: null, createdAt: new Date().toISOString() };
+        saveData();
         return true;
     }
-
-    function resetElection(adminKey) {
-        const ADMIN_KEY = "NepalElection2025";
-        if (adminKey !== ADMIN_KEY) { showToast("अमान्य प्रशासक कुञ्जी !", true); return false; }
-        if (!confirm("⚠️ सम्पूर्ण निर्वाचन रिसेट हुनेछ । सबै मत र दर्ता मेटिनेछ । के तपाईं निश्चित हुनुहुन्छ ?")) return false;
-        // clear everything
-        electionState = {
-            votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
-            citizensRegistry: {},
-            lastUpdated: new Date().toISOString()
-        };
-        persistElectionData();
-        // logout current session
-        currentSession = null;
-        persistSession();
-        renderCandidates();
-        renderResults();
-        updateUIForSession();
-        showRegistrationModal();
-        showToast("निर्वाचन पूर्ण रिसेट भयो । सबै मत हट्यो। प्रशासक पुन: सुरुवात", false);
+    function authenticateVoter(username, password) {
+        const voter = electionData.voters[username];
+        if(!voter || voter.passwordHash !== hashPassword(password)) throw new Error("Invalid credentials");
+        return { username, fullName: voter.fullName, hasVoted: voter.hasVoted, votedCandidateId: voter.votedCandidateId };
+    }
+    function castVote(voterUsername, candidateId) {
+        const voter = electionData.voters[voterUsername];
+        if(!voter) throw new Error("Voter not found");
+        if(voter.hasVoted) throw new Error("You have already voted");
+        const candidate = electionData.candidates.find(c => c.id === candidateId);
+        if(!candidate) throw new Error("Candidate not found");
+        voter.hasVoted = true;
+        voter.votedCandidateId = candidateId;
+        candidate.votes += 1;
+        saveData();
+        if(currentVoter && currentVoter.username === voterUsername) { currentVoter.hasVoted = true; currentVoter.votedCandidateId = candidateId; }
         return true;
     }
+    function adminLogin(username, password) { if(electionData.admin.username !== username || electionData.admin.passwordHash !== hashPassword(password)) return false; currentAdmin = true; return true; }
+    function addCandidate(name, party, description) { if(!name) throw new Error("Name required"); const newId = "c" + Date.now() + Math.random().toString(36).substring(2,5); electionData.candidates.push({ id: newId, name: name.trim(), party: party.trim() || "Independent", description: description.trim() || "", avatar: name.substring(0,2).toUpperCase(), votes: 0 }); saveData(); return newId; }
+    function deleteCandidate(candidateId) { const index = electionData.candidates.findIndex(c => c.id === candidateId); if(index === -1) throw new Error("Not found"); const resetVoters = []; for(let u in electionData.voters) { if(electionData.voters[u].votedCandidateId === candidateId) { electionData.voters[u].hasVoted = false; electionData.voters[u].votedCandidateId = null; resetVoters.push(u); } } electionData.candidates.splice(index,1); saveData(); if(currentVoter && resetVoters.includes(currentVoter.username)) { currentVoter.hasVoted = false; currentVoter.votedCandidateId = null; } return resetVoters.length; }
+    function updateCandidate(cid, name, party, desc) { let c = electionData.candidates.find(c=>c.id===cid); if(!c) return; if(name) c.name = name.trim(); if(party) c.party = party.trim(); if(desc) c.description = desc.trim(); c.avatar = c.name.substring(0,2).toUpperCase(); saveData(); }
+    function resetElectionFull() { electionData.candidates.forEach(c => c.votes = 0); for(let u in electionData.voters) { electionData.voters[u].hasVoted = false; electionData.voters[u].votedCandidateId = null; } if(currentVoter) { currentVoter.hasVoted = false; currentVoter.votedCandidateId = null; } saveData(); }
+    function changeAdminPassword(newPwd) { electionData.admin.passwordHash = hashPassword(newPwd); saveData(); }
 
-    function logoutVoter() {
-        currentSession = null;
-        persistSession();
-        renderCandidates();
-        renderResults();
-        updateUIForSession();
-        showRegistrationModal();
-        showToast("तपाईं लग आउट हुनुभयो । नयाँ राष्ट्रिय परिचयपत्रले दर्ता गर्न सक्नुहुन्छ।", false);
-    }
-
+    // UI Render
     function renderCandidates() {
-        const container = document.getElementById('candidatesList');
-        if (!container) return;
-        const hasVoted = currentSession ? currentSession.hasVoted : false;
-        container.innerHTML = CANDIDATES.map(c => {
-            const disabled = hasVoted;
-            let btnText = "मत दिनुहोस्";
-            if (hasVoted && currentSession?.votedFor === c.id) btnText = "✓ मत दिइसकियो";
-            else if (hasVoted) btnText = "मत सीमित";
-            return `
-            <div class="candidate-item">
-                <div class="candidate-info">
-                    <div class="candidate-avatar">${c.avatar}</div>
-                    <div class="candidate-details">
-                        <h4>${c.name}</h4>
-                        <p>${c.party} • ${c.slogan.substring(0, 35)}</p>
-                    </div>
+        const container = document.getElementById("candidatesContainer");
+        if(!container) return;
+        const loggedIn = currentVoter !== null;
+        const hasVoted = currentVoter ? currentVoter.hasVoted : false;
+        container.innerHTML = electionData.candidates.map(cand => `
+            <div class="candidate-row">
+                <div class="candidate-info" style="display:flex; align-items:center; gap:1rem;">
+                    <div class="candidate-avatar" style="width:50px; height:50px; background:#f3e5d8; border-radius:60px; display:flex; align-items:center; justify-content:center; font-weight:bold;">${cand.avatar}</div>
+                    <div><strong>${cand.name}</strong><br><span style="font-size:0.8rem;">${cand.party}</span><br><small>${cand.description.substring(0,50)}</small></div>
                 </div>
-                <button class="vote-btn" data-id="${c.id}" ${disabled ? 'disabled' : ''}>
-                    <i class="fas fa-check-circle"></i> ${btnText}
-                </button>
-            </div>`;
-        }).join('');
-        if (!hasVoted) {
-            document.querySelectorAll('.vote-btn:not(:disabled)').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const cid = parseInt(btn.getAttribute('data-id'));
-                    castVote(cid);
-                });
-            });
-        }
+                <button class="vote-btn" data-id="${cand.id}" ${!loggedIn || hasVoted ? 'disabled' : ''}>${hasVoted ? (currentVoter.votedCandidateId === cand.id ? "✓ Voted" : "Already Voted") : "Cast Vote"}</button>
+            </div>
+        `).join('');
+        if(loggedIn && !hasVoted) document.querySelectorAll('.vote-btn:not(:disabled)').forEach(btn => btn.addEventListener('click', (e) => { const cid = btn.getAttribute('data-id'); try { castVote(currentVoter.username, cid); showToast(`Vote cast for ${electionData.candidates.find(c=>c.id===cid).name}`, false); updateAllUI(); triggerConfetti(); } catch(err) { showToast(err.message, true); } }));
     }
 
     function renderResults() {
-        const container = document.getElementById('resultsLive');
-        if (!container) return;
-        const totalVotes = Object.values(electionState.votes).reduce((a,b)=>a+b,0);
-        const sorted = [...CANDIDATES].sort((a,b)=> (electionState.votes[b.id]||0) - (electionState.votes[a.id]||0));
-        let html = `<div><i class="fas fa-users"></i> <strong>कूल मतदान:</strong> ${totalVotes}</div>`;
-        sorted.forEach(c => {
-            const votes = electionState.votes[c.id] || 0;
-            const percent = totalVotes === 0 ? 0 : ((votes/totalVotes)*100).toFixed(1);
-            html += `
-            <div class="stat-item">
-                <div class="stat-name"><strong>${c.name}</strong><br><span style="font-size:0.65rem;">${c.party}</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: ${percent}%;"></div></div>
-                <div class="stat-votes">${votes} मत</div>
-            </div>
-            <div style="font-size:0.7rem; text-align:right; margin-top:-6px; margin-bottom:6px;">${percent}%</div>`;
-        });
-        if(totalVotes === 0) html += `<div class="total-votes"><i class="fas fa-chart-line"></i> हालसम्म कुनै मत छैन । पहिलो मतदाता बन्नुहोस्!</div>`;
-        else {
-            let maxVotes = -1, winners = [];
-            CANDIDATES.forEach(c => { if((electionState.votes[c.id]||0) > maxVotes){ maxVotes = electionState.votes[c.id]; winners = [c]; } else if((electionState.votes[c.id]||0) === maxVotes) winners.push(c); });
-            if(winners.length === 1) html += `<div class="total-votes"><i class="fas fa-trophy"></i> हालको अग्रणी: ${winners[0].name} (${maxVotes} मत)</div>`;
-            else if(maxVotes > 0) html += `<div class="total-votes"><i class="fas fa-handshake"></i> बराबरी: ${winners.map(w=>w.name).join(", ")}</div>`;
-        }
-        container.innerHTML = html;
+        const totalVotes = electionData.candidates.reduce((s,c)=> s + c.votes,0);
+        const sorted = [...electionData.candidates].sort((a,b)=>b.votes - a.votes);
+        let html = `<div class="voter-status"><strong>Total votes cast:</strong> ${totalVotes}</div>`;
+        sorted.forEach(c => { let percent = totalVotes === 0 ? 0 : ((c.votes/totalVotes)*100).toFixed(1); html += `<div><div style="display:flex; justify-content:space-between;"><span><strong>${c.name}</strong> (${c.party})</span><span>${c.votes} votes (${percent}%)</span></div><div class="progress-bg"><div class="progress-fill" style="width:${percent}%;"></div></div></div>`; });
+        if(totalVotes===0) html += "<p>No votes yet. Be the first to vote!</p>";
+        document.getElementById("resultsArea").innerHTML = html;
+        document.getElementById("totalVotersHome").innerText = Object.keys(electionData.voters).length;
+        document.getElementById("totalVotesHome").innerText = totalVotes;
+        let leader = sorted[0];
+        document.getElementById("leadingCandidateHome").innerHTML = leader ? `${leader.name} (${leader.votes})` : "—";
     }
 
-    function updateUIForSession() {
-        const nameSpan = document.getElementById('voterName');
-        const idSpan = document.getElementById('voterIdDisplay');
-        const statusSpan = document.getElementById('voteStatusMsg');
-        if (currentSession) {
-            nameSpan.textContent = currentSession.fullName;
-            const maskedNid = currentSession.nationalId.slice(0,4)+"****"+currentSession.nationalId.slice(-3);
-            idSpan.innerHTML = `<i class="fas fa-id-card"></i> NID: ${maskedNid} | ID: ${currentSession.voterId.slice(-6)}`;
-            if (currentSession.hasVoted) {
-                const votedCandidate = CANDIDATES.find(c=>c.id === currentSession.votedFor);
-                statusSpan.innerHTML = `<i class="fas fa-check-double"></i> मतदान भयो : ${votedCandidate ? votedCandidate.name : 'सफल'}`;
-                statusSpan.style.background = "#e6f2ef";
-            } else {
-                statusSpan.innerHTML = `<i class="fas fa-check-circle"></i> मतदानको लागि तयार - आवाज उठाउनुहोस्`;
-                statusSpan.style.background = "#fef1e0";
-            }
-        } else {
-            nameSpan.textContent = "दर्ता छैन";
-            idSpan.innerHTML = `<i class="fas fa-fingerprint"></i> कृपया दर्ता गर्नुहोस्`;
-            statusSpan.innerHTML = `<i class="fas fa-info-circle"></i> दर्ता गर्नुहोस् र मतदान गर्नुहोस्`;
-        }
+    function renderAdminCandidateList() {
+        const container = document.getElementById("candidateManagementList");
+        if(!container || !currentAdmin) return;
+        container.innerHTML = `<div class="admin-table"><table style="width:100%; border-collapse:collapse;">` + electionData.candidates.map(c => `<tr style="border-bottom:1px solid #e9e2d4;"><td style="padding:8px;"><strong>${c.name}</strong><br><small>${c.party}</small></td><td>Votes: ${c.votes}</td><td class="admin-actions"><button class="btn-icon edit-cand" data-id="${c.id}" title="Edit"><i class="fas fa-edit"></i></button><button class="btn-icon delete-cand" data-id="${c.id}" style="color:#b22234;"><i class="fas fa-trash-alt"></i></button></td></tr>`).join('') + `</table></div>`;
+        document.querySelectorAll('.edit-cand').forEach(btn => btn.addEventListener('click', () => { let cid = btn.getAttribute('data-id'); let cand = electionData.candidates.find(c=>c.id===cid); let newName = prompt("New name:", cand.name); let newParty = prompt("Party:", cand.party); let newDesc = prompt("Description:", cand.description); if(newName !== null) { updateCandidate(cid, newName, newParty, newDesc); updateAllUI(); renderAdminCandidateList(); showToast("Candidate updated", false); } }));
+        document.querySelectorAll('.delete-cand').forEach(btn => btn.addEventListener('click', () => { if(confirm("Delete candidate? Voters who voted this candidate will be reset.")) { try { deleteCandidate(btn.getAttribute('data-id')); updateAllUI(); renderAdminCandidateList(); showToast("Candidate removed", false); } catch(e){ showToast(e.message, true); } } }));
     }
 
-    function showRegistrationModal() { document.getElementById('registrationModal').style.display = 'flex'; }
-    function hideRegistrationModal() { document.getElementById('registrationModal').style.display = 'none'; }
-
-    function showToast(msg, isErr=false) {
-        const toast = document.getElementById('notificationToast');
-        const toastMsg = document.getElementById('toastMessage');
-        toastMsg.innerText = msg;
-        toast.classList.add('show');
-        toast.style.background = isErr ? '#b33b2c' : '#1f5738';
-        setTimeout(()=>toast.classList.remove('show'), 3200);
+    function updateAllUI() {
+        renderCandidates(); renderResults();
+        const greetDiv = document.getElementById("voterGreeting");
+        if(currentVoter) greetDiv.innerHTML = `<i class="fas fa-user-circle"></i> Welcome ${currentVoter.fullName} | ${currentVoter.hasVoted ? "✓ You have voted." : "🗳️ You can vote now."}`;
+        else if(currentAdmin) greetDiv.innerHTML = `<i class="fas fa-user-shield"></i> Admin mode: managing election`;
+        else greetDiv.innerHTML = `<i class="fas fa-id-card"></i> Not logged in. Please login to vote.`;
+        const authDiv = document.getElementById("authButtons"); const userDiv = document.getElementById("userInfo"); const userNameSpan = document.getElementById("userNameDisplay"); const adminNav = document.getElementById("adminNavLink"); const adminSection = document.getElementById("admin-section");
+        if(currentVoter) { authDiv.style.display = "none"; userDiv.style.display = "flex"; userNameSpan.innerHTML = `<i class="fas fa-user"></i> ${currentVoter.fullName}`; adminNav.style.display = "none"; adminSection.style.display = "none"; }
+        else if(currentAdmin) { authDiv.style.display = "none"; userDiv.style.display = "flex"; userNameSpan.innerHTML = `<i class="fas fa-user-shield"></i> Admin`; adminNav.style.display = "inline-block"; adminSection.style.display = "block"; renderAdminCandidateList(); }
+        else { authDiv.style.display = "flex"; userDiv.style.display = "none"; adminNav.style.display = "none"; adminSection.style.display = "none"; }
     }
 
-    function triggerConfettiNepal() {
-        const colors = ['#dc143c', '#003893', '#f4c542', '#2e7d32'];
-        for(let i=0;i<40;i++) {
-            const conf = document.createElement('div');
-            conf.style.position = 'fixed';
-            conf.style.width = '9px';
-            conf.style.height = '9px';
-            conf.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-            conf.style.left = Math.random() * window.innerWidth + 'px';
-            conf.style.top = '-15px';
-            conf.style.borderRadius = '50%';
-            conf.style.pointerEvents = 'none';
-            conf.style.zIndex = '9999';
-            document.body.appendChild(conf);
-            const anim = conf.animate([{ transform: 'translateY(0px) rotate(0deg)', opacity: 0.9 },{ transform: `translateY(${window.innerHeight+30}px) rotate(${Math.random()*360}deg)`, opacity: 0 }], { duration: 1500+Math.random()*800, easing: 'cubic-bezier(0.2,0.8,0.4,1)' });
-            anim.onfinish = () => conf.remove();
-        }
-    }
+    function showToast(msg, isErr) { const t = document.getElementById("toastMsg"); document.getElementById("toastText").innerText = msg; t.style.background = isErr ? "#b91c1c" : "#1f5738"; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 3000); }
+    function closeAllModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+    function triggerConfetti() { for(let i=0;i<60;i++) { let conf = document.createElement('div'); conf.style.position='fixed'; conf.style.width='8px'; conf.style.height='8px'; conf.style.backgroundColor=['#dc143c','#003893','#ffcc66','#2e7d32'][Math.floor(Math.random()*4)]; conf.style.left=Math.random()*window.innerWidth+'px'; conf.style.top='-10px'; conf.style.borderRadius='50%'; conf.style.pointerEvents='none'; conf.style.zIndex='9999'; document.body.appendChild(conf); conf.animate([{transform:'translateY(0px)', opacity:0.8},{transform:`translateY(${window.innerHeight+30}px)`, opacity:0}],{duration:1200+Math.random()*700}); setTimeout(()=>conf.remove(),1500); } }
 
-    function init() {
-        loadPersistedData();
-        if (currentSession && !electionState.citizensRegistry[currentSession.nationalId]) {
-            currentSession = null;
-            persistSession();
-        }
-        if (!currentSession) showRegistrationModal();
-        else {
-            const syncCitizen = electionState.citizensRegistry[currentSession.nationalId];
-            if(syncCitizen) { currentSession.hasVoted = syncCitizen.hasVoted; currentSession.votedFor = syncCitizen.votedCandidateId; persistSession(); }
-            hideRegistrationModal();
-        }
-        renderCandidates();
-        renderResults();
-        updateUIForSession();
-        document.getElementById('registerBtn').addEventListener('click', () => {
-            const name = document.getElementById('voterFullName').value.trim();
-            const nid = document.getElementById('nationalId').value.trim();
-            try { registerVoter(name, nid); } catch(e) { showToast(e.message, true); }
-        });
-        document.getElementById('resetElectionBtn').addEventListener('click', () => {
-            const key = prompt('प्रशासक कुञ्जी प्रविष्ट गर्नुहोस्:');
-            if(key) resetElection(key);
-        });
-        document.getElementById('logoutBtn').addEventListener('click', () => { logoutVoter(); });
-        document.getElementById('voterFullName').addEventListener('keypress', e => { if(e.key==='Enter') document.getElementById('registerBtn').click(); });
-        document.getElementById('nationalId').addEventListener('keypress', e => { if(e.key==='Enter') document.getElementById('registerBtn').click(); });
-        setInterval(() => { renderResults(); }, 2000);
-    }
-    init();
+    // Event listeners
+    document.getElementById("showLoginBtn")?.addEventListener("click", ()=> { closeAllModals(); document.getElementById("voterLoginModal").style.display = "flex"; });
+    document.getElementById("showRegisterBtn")?.addEventListener("click", ()=> { closeAllModals(); document.getElementById("voterRegisterModal").style.display = "flex"; });
+    document.getElementById("showAdminLoginBtn")?.addEventListener("click", ()=> { closeAllModals(); document.getElementById("adminLoginModal").style.display = "flex"; });
+    document.getElementById("logoutBtn")?.addEventListener("click", ()=> { currentVoter = null; currentAdmin = false; updateAllUI(); showToast("Logged out", false); });
+    document.getElementById("confirmLoginBtn")?.addEventListener("click", ()=>{ try { const u = document.getElementById("loginUsername").value, p = document.getElementById("loginPassword").value; const voter = authenticateVoter(u,p); currentVoter = voter; currentAdmin = false; closeAllModals(); updateAllUI(); showToast(`Welcome ${voter.fullName}`, false); } catch(e){ showToast(e.message, true); } });
+    document.getElementById("confirmRegisterBtn")?.addEventListener("click", ()=>{ try { registerVoter(document.getElementById("regUsername").value, document.getElementById("regPassword").value, document.getElementById("regFullName").value, document.getElementById("regNationalId").value); const voter = authenticateVoter(document.getElementById("regUsername").value, document.getElementById("regPassword").value); currentVoter = voter; currentAdmin = false; closeAllModals(); updateAllUI(); showToast("Registration successful! You can now vote.", false); } catch(e){ showToast(e.message, true); } });
+    document.getElementById("confirmAdminLoginBtn")?.addEventListener("click", ()=>{ const un = document.getElementById("adminUsername").value, pw = document.getElementById("adminPassword").value; if(adminLogin(un, pw)) { currentAdmin = true; currentVoter = null; closeAllModals(); updateAllUI(); showToast("Admin access granted", false); } else showToast("Invalid admin credentials", true); });
+    document.getElementById("addCandidateBtn")?.addEventListener("click", ()=> { if(!currentAdmin) return; closeAllModals(); document.getElementById("addCandidateModal").style.display = "flex"; });
+    document.getElementById("saveNewCandidateBtn")?.addEventListener("click", ()=>{ try { addCandidate(document.getElementById("newCandName").value, document.getElementById("newCandParty").value, document.getElementById("newCandDesc").value); closeAllModals(); updateAllUI(); if(currentAdmin) renderAdminCandidateList(); showToast("Candidate added", false); document.getElementById("newCandName").value = ""; document.getElementById("newCandParty").value = ""; document.getElementById("newCandDesc").value = ""; } catch(e){ showToast(e.message, true); } });
+    document.getElementById("resetElectionAdminBtn")?.addEventListener("click", ()=>{ if(currentAdmin && confirm("RESET all votes?")) { resetElectionFull(); updateAllUI(); showToast("Election reset", false); } });
+    document.getElementById("changeAdminPasswordBtn")?.addEventListener("click", ()=>{ let p = prompt("Enter new admin password:"); if(p && p.length>=4) { changeAdminPassword(p); showToast("Admin password updated", false); } else showToast("Invalid", true); });
+    document.getElementById("switchToRegister")?.addEventListener("click", (e)=>{ e.preventDefault(); closeAllModals(); document.getElementById("voterRegisterModal").style.display = "flex"; });
+    document.getElementById("scrollToVoteBtn")?.addEventListener("click", ()=> document.getElementById("vote-section").scrollIntoView({ behavior: "smooth" }));
+    document.getElementById("navHome")?.addEventListener("click", ()=> document.getElementById("home").scrollIntoView({ behavior: "smooth" }));
+    document.getElementById("navVote")?.addEventListener("click", ()=> document.getElementById("vote-section").scrollIntoView({ behavior: "smooth" }));
+    document.getElementById("adminNavLink")?.addEventListener("click", ()=> document.getElementById("admin-section").scrollIntoView({ behavior: "smooth" }));
+    document.querySelectorAll("#cancelLoginBtn, #cancelRegisterBtn, #cancelAdminLoginBtn, #cancelAddCandidateBtn").forEach(btn => btn?.addEventListener("click", closeAllModals));
+
+    // Particle generation
+    function createParticles() { const container = document.getElementById("particlesContainer"); for(let i=0;i<50;i++) { let p = document.createElement("div"); p.classList.add("particle"); let size = Math.random()*7+2; p.style.width = size+"px"; p.style.height = size+"px"; p.style.left = Math.random()*100+"%"; p.style.animationDelay = Math.random()*12+"s"; p.style.animationDuration = 8+Math.random()*12+"s"; p.style.opacity = Math.random()*0.5; container.appendChild(p); } }
+    loadData(); updateAllUI(); setInterval(()=>renderResults(), 3000); createParticles();
 </script>
 </body>
 </html>
