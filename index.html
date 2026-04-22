@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>SecureVote | Complete Voting System</title>
+    <title>निर्वाचन आयोग, नेपाल | NepalVote - Digital Democracy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -15,120 +15,131 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e9eff8 100%);
+            background: linear-gradient(145deg, #fcf6e8 0%, #f0ebdd 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2rem 1.5rem;
+            position: relative;
         }
-
-        .voting-container {
-            max-width: 1300px;
+        /* Nepal flag inspired accent */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(255,255,255,0.75);
+            height: 6px;
+            background: linear-gradient(90deg, #dc143c 0%, #dc143c 45%, #003893 45%, #003893 100%);
+            z-index: 1000;
+        }
+        .voting-container {
+            max-width: 1350px;
+            width: 100%;
+            background: rgba(255, 252, 240, 0.92);
             backdrop-filter: blur(2px);
             border-radius: 2.5rem;
-            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25), 0 4px 14px rgba(0,0,0,0.08);
             overflow: hidden;
+            border: 1px solid rgba(220,20,60,0.15);
         }
 
         .header {
-            background: #ffffff;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: #ffffffdd;
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #ffe6c7;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
+            backdrop-filter: blur(4px);
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .logo-icon {
-            background: #1e3c72;
-            width: 44px;
-            height: 44px;
+            background: #b22234;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 1.2rem;
             color: white;
-            font-size: 1.6rem;
-            box-shadow: 0 8px 14px -8px rgba(0,32,64,0.2);
+            font-size: 1.8rem;
+            box-shadow: 0 6px 12px -6px rgba(0,0,0,0.2);
         }
 
         .logo-text h1 {
-            font-size: 1.55rem;
-            font-weight: 700;
+            font-size: 1.7rem;
+            font-weight: 800;
             letter-spacing: -0.3px;
-            background: linear-gradient(120deg, #0b2b44, #1b4f8b);
+            background: linear-gradient(135deg, #003893, #b22234);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
-
         .logo-text span {
-            font-size: 0.75rem;
-            color: #4a627a;
-            font-weight: 500;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #b45f2b;
+            letter-spacing: 0.5px;
         }
 
         .badge {
-            background: #eef2ff;
-            padding: 0.4rem 1rem;
+            background: #fdf5e6;
+            padding: 0.4rem 1.2rem;
             border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1e4b7a;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #8b3c1c;
+            border: 1px solid #dcb572;
         }
 
         .voter-panel {
             background: white;
             margin: 1.5rem 2rem 0 2rem;
             border-radius: 1.8rem;
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.8rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02), 0 6px 12px -8px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #f0e2cc;
         }
 
         .voter-greeting {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .voter-greeting i {
             font-size: 1.8rem;
-            color: #2c7da0;
+            color: #c0392b;
         }
 
         .voter-greeting h3 {
-            font-weight: 600;
-            color: #0a2942;
+            font-weight: 700;
+            color: #2c3e2f;
         }
 
         .voter-id-badge {
-            background: #f0f6fa;
+            background: #fef1e0;
             padding: 0.4rem 1.2rem;
             border-radius: 2rem;
             font-family: monospace;
-            font-weight: 500;
-            color: #1a5d8f;
-            font-size: 0.85rem;
+            font-weight: 600;
+            color: #a55117;
+            font-size: 0.8rem;
         }
 
         .content-grid {
@@ -139,19 +150,9 @@
         }
 
         @media (max-width: 850px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .voter-panel {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
+            .content-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .voter-panel { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .header { flex-direction: column; text-align: center; }
         }
 
         .candidates-card, .results-card {
@@ -159,18 +160,19 @@
             border-radius: 1.8rem;
             padding: 1.5rem;
             box-shadow: 0 12px 28px -10px rgba(0,0,0,0.08);
+            border: 1px solid #fae6cf;
         }
 
         .section-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: #1b3b4f;
-            border-left: 5px solid #2c7da0;
+            color: #7a2e1a;
+            border-left: 5px solid #dc143c;
             padding-left: 1rem;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .candidates-list {
@@ -180,7 +182,7 @@
         }
 
         .candidate-item {
-            background: #f9fbfd;
+            background: #fefcf8;
             border-radius: 1.2rem;
             padding: 1rem 1.2rem;
             display: flex;
@@ -188,7 +190,7 @@
             align-items: center;
             flex-wrap: wrap;
             transition: all 0.2s;
-            border: 1px solid #eef2f8;
+            border: 1px solid #f2e0cc;
         }
 
         .candidate-info {
@@ -199,147 +201,116 @@
         }
 
         .candidate-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(145deg, #dcebff, #c2d9fc);
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(145deg, #ffebd2, #ffddbb);
             border-radius: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.3rem;
-            color: #1f6392;
+            font-size: 1.2rem;
+            color: #b64926;
         }
 
         .candidate-details h4 {
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.1rem;
-            color: #0a2e46;
+            color: #522e1a;
         }
-
         .candidate-details p {
-            font-size: 0.75rem;
-            color: #5b7a99;
+            font-size: 0.7rem;
+            color: #9b6a42;
             margin-top: 4px;
         }
 
         .vote-btn {
             background: #ffffff;
-            border: 1.5px solid #cbdde9;
+            border: 1.5px solid #dbba95;
             padding: 0.6rem 1.4rem;
             border-radius: 2rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            color: #1f6392;
+            font-size: 0.8rem;
+            color: #b64926;
             cursor: pointer;
             transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-
         .vote-btn:hover:not(:disabled) {
-            background: #1e6f9f;
-            border-color: #1e6f9f;
+            background: #dc143c;
+            border-color: #dc143c;
             color: white;
             transform: scale(1.02);
         }
-
-        .vote-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
+        .vote-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .voted-badge {
-            background: #e1f5e8;
-            color: #1e7e4a;
+            background: #e3f5ec;
+            color: #1f6e43;
             padding: 0.4rem 1rem;
             border-radius: 2rem;
             font-size: 0.75rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
-
         .stat-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1rem;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #edf2f7;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f3e5d2;
         }
-
-        .stat-name {
-            font-weight: 500;
-            color: #2c4e6e;
-            width: 35%;
-        }
-
+        .stat-name { font-weight: 600; color: #5c371d; width: 38%; }
         .progress-bar-bg {
             flex: 1;
-            background: #e7edf3;
+            background: #f3e6d8;
             border-radius: 30px;
             height: 10px;
             margin: 0 12px;
             overflow: hidden;
         }
-
-        .progress-fill {
-            background: #2c7da0;
-            width: 0%;
-            height: 100%;
-            border-radius: 30px;
-            transition: width 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-
-        .stat-votes {
-            font-weight: 700;
-            color: #1b4f72;
-            min-width: 55px;
-            text-align: right;
-            font-size: 0.9rem;
-        }
-
+        .progress-fill { background: #dc143c; width: 0%; height: 100%; border-radius: 30px; transition: width 0.4s; }
+        .stat-votes { font-weight: 700; color: #a0411c; min-width: 65px; text-align: right; }
         .total-votes {
             margin-top: 1.5rem;
-            background: #eef3fc;
+            background: #fef5e9;
             border-radius: 1.2rem;
             padding: 0.9rem;
             text-align: center;
             font-weight: 600;
-            color: #0b3954;
+            color: #8b3a1c;
         }
-
-        .reset-btn {
+        .reset-btn, .logout-btn {
             background: none;
             border: none;
-            color: #8fabbd;
+            color: #b97f51;
             cursor: pointer;
             font-size: 0.75rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: 0.2s;
+            margin-right: 12px;
         }
-
-        .reset-btn:hover {
-            color: #d9534f;
+        .reset-btn:hover { color: #dc143c; }
+        .logout-btn:hover { color: #2c6e2f; }
+        .admin-panel {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f2e0cc;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #ad8b67;
         }
-
         .notification {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: #1f3b4c;
+            background: #1f3b2c;
             color: white;
             padding: 0.9rem 1.5rem;
             border-radius: 60px;
             font-weight: 500;
             backdrop-filter: blur(8px);
-            box-shadow: 0 12px 18px -10px rgba(0,0,0,0.2);
             z-index: 1000;
             transform: translateY(120%);
             transition: transform 0.3s ease;
@@ -347,558 +318,462 @@
             align-items: center;
             gap: 12px;
         }
-
-        .notification.show {
-            transform: translateY(0);
-        }
-
+        .notification.show { transform: translateY(0); }
         .registration-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.65);
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
         }
-
         .modal-content {
-            background: white;
+            background: #fffaf2;
             border-radius: 2rem;
             padding: 2rem;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
             text-align: center;
+            border-top: 6px solid #dc143c;
         }
-
         .modal-content input {
             width: 100%;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 2px solid #e0e8f0;
+            padding: 0.9rem;
+            margin: 0.7rem 0;
+            border: 2px solid #f0e0cd;
             border-radius: 1rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            background: white;
         }
-
         .modal-content button {
-            background: #1e3c72;
+            background: #b22234;
             color: white;
             border: none;
             padding: 0.8rem 2rem;
             border-radius: 2rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
+            margin-top: 8px;
         }
-
         footer {
             text-align: center;
-            padding: 1.2rem 2rem;
-            font-size: 0.75rem;
-            color: #6b8dab;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            background: #ffffffc9;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: #a77c54;
+            background: #fffbf0;
         }
-
         .online-indicator {
             display: inline-block;
             width: 10px;
             height: 10px;
+            background: #2e7d32;
             border-radius: 50%;
-            background: #4caf50;
             margin-left: 8px;
             animation: pulse 1.5s infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .admin-panel {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eef2f8;
-            font-size: 0.7rem;
-            text-align: center;
-        }
+        @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
+        .nid-hint { font-size: 0.7rem; color: #b97f51; margin-top: 5px; }
     </style>
 </head>
 <body>
-
 <div class="voting-container">
     <div class="header">
         <div class="logo-area">
-            <div class="logo-icon">
-                <i class="fas fa-vote-yea"></i>
-            </div>
+            <div class="logo-icon"><i class="fas fa-landmark"></i></div>
             <div class="logo-text">
-                <h1>SecureVote <span class="online-indicator"></span></h1>
-                <span>full-stack • encrypted • trusted</span>
+                <h1>नेपाल निर्वाचन <span class="online-indicator"></span></h1>
+                <span>Election Commission Nepal • सुरक्षित मतदान</span>
             </div>
         </div>
-        <div class="badge">
-            <i class="fas fa-shield-alt"></i> backend integrated | persistent storage
-        </div>
+        <div class="badge"><i class="fas fa-shield-alt"></i> नागरिक प्रमाणीकरण | मत एक पटक</div>
     </div>
 
     <div class="voter-panel">
         <div class="voter-greeting">
             <i class="fas fa-id-card"></i>
-            <h3>Voter: <span id="voterName">Not registered</span></h3>
-            <div class="voter-id-badge" id="voterIdDisplay">
-                <i class="fas fa-fingerprint"></i> Not registered
-            </div>
+            <h3>मतदाता: <span id="voterName">परिचय छैन</span></h3>
+            <div class="voter-id-badge" id="voterIdDisplay"><i class="fas fa-fingerprint"></i> राष्ट्रिय परिचयपत्र ?</div>
         </div>
-        <div id="voteStatusMsg" class="voted-badge" style="background:#ecfdf5;">
-            <i class="fas fa-info-circle"></i> Register to vote
-        </div>
+        <div id="voteStatusMsg" class="voted-badge"><i class="fas fa-info-circle"></i> दर्ता गर्नुहोस्</div>
+        <div><button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> नयाँ मतदाता / Logout</button></div>
     </div>
 
     <div class="content-grid">
         <div class="candidates-card">
-            <div class="section-title">
-                <i class="fas fa-user-check"></i> Cast your vote
-                <span style="font-size:0.8rem; font-weight:normal; margin-left:auto;">one person, one vote</span>
-            </div>
-            <div class="candidates-list" id="candidatesList">
-                <div style="text-align:center; padding:2rem;">Loading candidates...</div>
-            </div>
+            <div class="section-title"><i class="fas fa-user-check"></i> उम्मेदवार छनौट गर्नुहोस् <span style="font-size:0.7rem;">एक व्यक्ति एक मत</span></div>
+            <div class="candidates-list" id="candidatesList">लोड हुँदै...</div>
         </div>
-
         <div class="results-card">
-            <div class="section-title">
-                <i class="fas fa-chart-simple"></i> Live Results
+            <div class="section-title"><i class="fas fa-chart-simple"></i> प्रत्यक्ष मत परिणाम (लाइभ)</div>
+            <div id="resultsLive">परिणाम लोड हुँदै...</div>
+            <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                <button id="resetElectionBtn" class="reset-btn"><i class="fas fa-undo-alt"></i> पुन: स्थापित (प्रशासक)</button>
             </div>
-            <div id="resultsLive" class="live-stats">
-                <div style="text-align:center; padding:2rem;">Loading results...</div>
-            </div>
-            <button id="resetElectionBtn" class="reset-btn"><i class="fas fa-undo-alt"></i> Reset Election (admin)</button>
-            <div class="admin-panel">
-                <i class="fas fa-key"></i> Admin key: SecureVote2024
-            </div>
+            <div class="admin-panel"><i class="fas fa-key"></i> प्रशासक कुञ्जी: NepalElection2025</div>
         </div>
     </div>
-    <footer>
-        <i class="fas fa-lock"></i> encrypted & anonymized | each vote is irreversible once cast | data persisted locally
-    </footer>
+    <footer><i class="fas fa-lock"></i> नेपाल निर्वाचन आयोगको सिमुलेसन | एक राष्ट्रिय परिचयपत्र = एक मत | डाटा स्थानीय भण्डारण</footer>
 </div>
 
 <div id="registrationModal" class="registration-modal">
     <div class="modal-content">
-        <i class="fas fa-vote-yea" style="font-size: 3rem; color: #1e3c72;"></i>
-        <h2 style="margin: 1rem 0;">Welcome to SecureVote</h2>
-        <p>Please enter your name to register and vote</p>
-        <input type="text" id="voterNameInput" placeholder="Enter your full name" maxlength="50">
-        <button id="registerBtn"><i class="fas fa-id-card"></i> Register to Vote</button>
+        <i class="fas fa-vote-yea" style="font-size: 3rem; color:#b22234;"></i>
+        <h2 style="margin: 1rem 0;">निर्वाचनमा स्वागत छ</h2>
+        <p>राष्ट्रिय परिचयपत्र (NID) र पूरा नाम दर्ता गर्नुहोस्</p>
+        <input type="text" id="voterFullName" placeholder="पूरा नाम (जस्तै: हरि प्रसाद शर्मा)" maxlength="60">
+        <input type="text" id="nationalId" placeholder="राष्ट्रिय परिचयपत्र नं. (NID: १२ अंक / अद्वितीय)" maxlength="20">
+        <div class="nid-hint"><i class="fas fa-info-circle"></i> नेपाल सरकारको NID अनुकरण: अद्वितीय पहिचान आवश्यक छ</div>
+        <button id="registerBtn"><i class="fas fa-id-card"></i> मतदाता दर्ता गर्नुहोस्</button>
     </div>
 </div>
-
-<div id="notificationToast" class="notification">
-    <i class="fas fa-ballot-check"></i> <span id="toastMessage">Your vote has been recorded!</span>
-</div>
+<div id="notificationToast" class="notification"><i class="fas fa-ballot-check"></i> <span id="toastMessage">तपाईंको मत सुरक्षित रह्यो</span></div>
 
 <script>
-    // ==================== COMPLETE BACKEND SIMULATION WITH PERSISTENCE ====================
-    // This is a full-stack simulation with localStorage persistence, vote tracking, and security features
-    
+    // ------------------- NEPAL VOTING SYSTEM WITH UNIQUE NATIONAL ID ------------------
+    // CANDIDATES (Major parties of Nepal)
     const CANDIDATES = [
-        { id: 1, name: "Dr. Elena Vasquez", party: "Progressive Future", avatar: "E.V", short: "Innovation & Climate" },
-        { id: 2, name: "Michael Chen", party: "Unity Alliance", avatar: "M.C", short: "Economy & Growth" },
-        { id: 3, name: "Sarah Okafor", party: "People's Mandate", avatar: "S.O", short: "Equity & Justice" },
-        { id: 4, name: "James Whitmore", party: "Stewardship Party", avatar: "J.W", short: "Sustainable Dev." }
+        { id: 1, name: "केपी शर्मा ओली", party: "नेकपा (एमाले)", avatar: "KP", slogan: "समृद्ध नेपाल, सुखी नेपाली" },
+        { id: 2, name: "शेरबहादुर देउवा", party: "नेपाली कांग्रेस", avatar: "SD", slogan: "स्थिरता, विकास र लोकतन्त्र" },
+        { id: 3, name: "पुष्पकमल दाहाल", party: "माओवादी केन्द्र", avatar: "PD", slogan: "सामाजिक न्याय, समृद्धि" },
+        { id: 4, name: "रवि लामिछाने", party: "राष्ट्रिय स्वतन्त्र पार्टी", avatar: "RL", slogan: "सुशासन, विकास, दुरुपयोग अन्त्य" },
+        { id: 5, name: "उपेन्द्र यादव", party: "जनता समाजवादी पार्टी", avatar: "UY", slogan: "सङ्घीय लोकतन्त्र, सबैको अधिकार" }
     ];
-    
-    // State management
-    let currentSession = null;
-    let voteData = {
-        votes: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        voters: {}, // voterId -> candidateId
+
+    // Election data structure (persisted)
+    let electionState = {
+        votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+        citizensRegistry: {},   // key: nationalId (unique) -> { voterId, fullName, hasVoted, votedCandidateId, registeredAt }
         lastUpdated: new Date().toISOString()
     };
-    
-    // Load data from localStorage
+
+    let currentSession = null;  // { nationalId, fullName, voterId, hasVoted, votedFor }
+
+    // ----- helper functions -----
     function loadPersistedData() {
-        const saved = localStorage.getItem('securevote_fullstack_data');
+        const saved = localStorage.getItem('nepal_election_secure');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                if (parsed.votes && parsed.voters) {
-                    voteData = parsed;
+                if (parsed.votes && parsed.citizensRegistry) {
+                    electionState = parsed;
+                    // ensure votes for all candidates
+                    CANDIDATES.forEach(c => { if(electionState.votes[c.id] === undefined) electionState.votes[c.id] = 0; });
                 }
-            } catch(e) {}
+            } catch(e) { console.warn(e); }
         }
-        
-        const savedSession = localStorage.getItem('securevote_session');
+        const savedSession = localStorage.getItem('nepal_voter_session');
         if (savedSession) {
             try {
-                currentSession = JSON.parse(savedSession);
-                // Check session expiry
-                if (new Date(currentSession.expiresAt) < new Date()) {
-                    currentSession = null;
-                    localStorage.removeItem('securevote_session');
+                const sess = JSON.parse(savedSession);
+                if (new Date(sess.expiresAt) > new Date()) {
+                    // validate that citizen still exists in registry and hasVoted flag aligns
+                    if (electionState.citizensRegistry[sess.nationalId]) {
+                        const citizen = electionState.citizensRegistry[sess.nationalId];
+                        currentSession = {
+                            nationalId: sess.nationalId,
+                            fullName: citizen.fullName,
+                            voterId: citizen.voterId,
+                            hasVoted: citizen.hasVoted,
+                            votedFor: citizen.votedCandidateId,
+                            expiresAt: sess.expiresAt
+                        };
+                    } else {
+                        currentSession = null;
+                        localStorage.removeItem('nepal_voter_session');
+                    }
+                } else {
+                    localStorage.removeItem('nepal_voter_session');
                 }
-            } catch(e) {}
+            } catch(e) { currentSession = null; }
         }
     }
-    
-    // Save vote data
-    function persistVoteData() {
-        voteData.lastUpdated = new Date().toISOString();
-        localStorage.setItem('securevote_fullstack_data', JSON.stringify(voteData));
+
+    function persistElectionData() {
+        electionState.lastUpdated = new Date().toISOString();
+        localStorage.setItem('nepal_election_secure', JSON.stringify(electionState));
     }
-    
-    // Save session
+
     function persistSession() {
         if (currentSession) {
-            localStorage.setItem('securevote_session', JSON.stringify(currentSession));
+            const sessionToStore = {
+                nationalId: currentSession.nationalId,
+                fullName: currentSession.fullName,
+                voterId: currentSession.voterId,
+                hasVoted: currentSession.hasVoted,
+                votedFor: currentSession.votedFor,
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+            };
+            localStorage.setItem('nepal_voter_session', JSON.stringify(sessionToStore));
         } else {
-            localStorage.removeItem('securevote_session');
+            localStorage.removeItem('nepal_voter_session');
         }
     }
-    
-    // Generate unique voter ID
+
     function generateVoterId() {
-        const randomPart = Math.random().toString(36).substring(2, 10).toUpperCase();
-        const timestamp = Date.now().toString(36).toUpperCase();
-        return `V-${timestamp}-${randomPart}`;
+        return "NEP-" + Date.now().toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
     }
-    
-    // Create new session
-    function createSession(voterName) {
-        return {
-            sessionId: 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8),
-            voterId: generateVoterId(),
-            voterName: voterName,
-            createdAt: new Date().toISOString(),
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-            hasVoted: false,
-            votedFor: null
-        };
+
+    function validateNid(nid) {
+        return nid && nid.trim().length >= 4 && /^[a-zA-Z0-9-]+$/.test(nid.trim());
     }
-    
-    // Register voter
-    function registerVoter(voterName) {
-        if (!voterName || voterName.trim().length < 2) {
-            throw new Error('Valid name required');
+
+    // Registration with unique National ID
+    function registerVoter(fullName, nationalId) {
+        if (!fullName || fullName.trim().length < 3) throw new Error("कृपया पूरा नाम राख्नुहोस्");
+        if (!validateNid(nationalId)) throw new Error("मान्य राष्ट्रिय परिचयपत्र नं. राख्नुहोस् (कम्तीमा ४ अक्षर/अंक)");
+        const cleanNid = nationalId.trim().toUpperCase();
+        const existingCitizen = electionState.citizensRegistry[cleanNid];
+        if (existingCitizen && existingCitizen.hasVoted === true) {
+            throw new Error("यो NID बाट पहिले नै मत खसालिसकिएको छ । एक मतदाता एक मत ।");
         }
-        currentSession = createSession(voterName.trim());
+        // If already registered but not voted -> allow resume session
+        if (existingCitizen && existingCitizen.hasVoted === false) {
+            // resume existing registration
+            currentSession = {
+                nationalId: cleanNid,
+                fullName: existingCitizen.fullName,
+                voterId: existingCitizen.voterId,
+                hasVoted: false,
+                votedFor: null,
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+            };
+            persistSession();
+            updateUIForSession();
+            hideRegistrationModal();
+            showToast(`स्वागत छ ${existingCitizen.fullName}, तपाईं मतदानको लागि तयार हुनुहुन्छ।`, false);
+            return currentSession;
+        }
+        // new registration
+        const voterId = generateVoterId();
+        electionState.citizensRegistry[cleanNid] = {
+            voterId: voterId,
+            fullName: fullName.trim(),
+            hasVoted: false,
+            votedCandidateId: null,
+            registeredAt: new Date().toISOString()
+        };
+        persistElectionData();
+        currentSession = {
+            nationalId: cleanNid,
+            fullName: fullName.trim(),
+            voterId: voterId,
+            hasVoted: false,
+            votedFor: null,
+            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+        };
         persistSession();
         updateUIForSession();
         hideRegistrationModal();
-        showToast(`Welcome ${voterName}! You are now registered to vote.`);
+        showToast(`धन्यवाद ${fullName} ! तपाईं सफलतापूर्वक दर्ता हुनुभयो । अब मतदान गर्न सक्नुहुन्छ।`, false);
         return currentSession;
     }
-    
-    // Check if voter has already voted
-    function hasVoterVoted(voterId) {
-        return voteData.voters[voterId] !== undefined;
-    }
-    
-    // Cast vote
+
     function castVote(candidateId) {
-        if (!currentSession) {
-            showToast('Please register first', true);
+        if (!currentSession) { showToast("कृपया पहिले दर्ता गर्नुहोस्", true); return false; }
+        if (currentSession.hasVoted) { showToast("तपाईंले पहिले नै मत दिइसक्नुभएको छ । धन्यवाद !", true); return false; }
+        const citizen = electionState.citizensRegistry[currentSession.nationalId];
+        if (!citizen || citizen.hasVoted) {
+            showToast("यो पहिचानले मत दिन सक्दैन । सम्पर्क गर्नुहोस्", true);
             return false;
         }
-        
-        if (currentSession.hasVoted) {
-            showToast('You have already cast your vote!', true);
-            return false;
-        }
-        
-        if (hasVoterVoted(currentSession.voterId)) {
-            currentSession.hasVoted = true;
-            persistSession();
-            showToast('You have already voted in this election!', true);
-            updateUIForSession();
-            return false;
-        }
-        
         const candidate = CANDIDATES.find(c => c.id === candidateId);
         if (!candidate) return false;
-        
-        // Record vote
-        voteData.votes[candidateId] = (voteData.votes[candidateId] || 0) + 1;
-        voteData.voters[currentSession.voterId] = candidateId;
+        // record vote
+        electionState.votes[candidateId] = (electionState.votes[candidateId] || 0) + 1;
+        citizen.hasVoted = true;
+        citizen.votedCandidateId = candidateId;
         currentSession.hasVoted = true;
         currentSession.votedFor = candidateId;
-        currentSession.votedAt = new Date().toISOString();
-        
-        persistVoteData();
+        persistElectionData();
         persistSession();
-        
-        // Update UI
         renderCandidates();
         renderResults();
         updateUIForSession();
-        
-        showToast(`✓ Vote cast for ${candidate.name}. Thank you for participating!`);
-        
-        // Simple confetti effect
-        triggerConfetti();
+        showToast(`✓ मत दिइयो: ${candidate.name} (${candidate.party}) । लोकतन्त्र सबल बन्दै`, false);
+        triggerConfettiNepal();
         return true;
     }
-    
-    // Reset election (admin only)
+
     function resetElection(adminKey) {
-        const ADMIN_KEY = 'SecureVote2024';
-        if (adminKey !== ADMIN_KEY) {
-            showToast('Invalid admin key!', true);
-            return false;
-        }
-        
-        if (currentSession && currentSession.hasVoted && !confirm('⚠️ WARNING: This will reset the entire election, erasing all votes including yours. Are you sure?')) {
-            return false;
-        }
-        
-        voteData = {
-            votes: { 1: 0, 2: 0, 3: 0, 4: 0 },
-            voters: {},
+        const ADMIN_KEY = "NepalElection2025";
+        if (adminKey !== ADMIN_KEY) { showToast("अमान्य प्रशासक कुञ्जी !", true); return false; }
+        if (!confirm("⚠️ सम्पूर्ण निर्वाचन रिसेट हुनेछ । सबै मत र दर्ता मेटिनेछ । के तपाईं निश्चित हुनुहुन्छ ?")) return false;
+        // clear everything
+        electionState = {
+            votes: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+            citizensRegistry: {},
             lastUpdated: new Date().toISOString()
         };
-        
-        if (currentSession) {
-            currentSession.hasVoted = false;
-            currentSession.votedFor = null;
-            persistSession();
-        }
-        
-        persistVoteData();
+        persistElectionData();
+        // logout current session
+        currentSession = null;
+        persistSession();
         renderCandidates();
         renderResults();
         updateUIForSession();
-        showToast('Election has been reset. All votes cleared.');
+        showRegistrationModal();
+        showToast("निर्वाचन पूर्ण रिसेट भयो । सबै मत हट्यो। प्रशासक पुन: सुरुवात", false);
         return true;
     }
-    
-    // Render candidates with vote buttons
+
+    function logoutVoter() {
+        currentSession = null;
+        persistSession();
+        renderCandidates();
+        renderResults();
+        updateUIForSession();
+        showRegistrationModal();
+        showToast("तपाईं लग आउट हुनुभयो । नयाँ राष्ट्रिय परिचयपत्रले दर्ता गर्न सक्नुहुन्छ।", false);
+    }
+
     function renderCandidates() {
         const container = document.getElementById('candidatesList');
         if (!container) return;
-        
         const hasVoted = currentSession ? currentSession.hasVoted : false;
-        
-        container.innerHTML = CANDIDATES.map(candidate => {
-            const isDisabled = hasVoted;
-            const buttonText = hasVoted ? (currentSession.votedFor === candidate.id ? '✓ Voted' : 'Vote locked') : 'Vote now';
-            
+        container.innerHTML = CANDIDATES.map(c => {
+            const disabled = hasVoted;
+            let btnText = "मत दिनुहोस्";
+            if (hasVoted && currentSession?.votedFor === c.id) btnText = "✓ मत दिइसकियो";
+            else if (hasVoted) btnText = "मत सीमित";
             return `
-                <div class="candidate-item">
-                    <div class="candidate-info">
-                        <div class="candidate-avatar">${candidate.avatar}</div>
-                        <div class="candidate-details">
-                            <h4>${candidate.name}</h4>
-                            <p>${candidate.party} • ${candidate.short}</p>
-                        </div>
+            <div class="candidate-item">
+                <div class="candidate-info">
+                    <div class="candidate-avatar">${c.avatar}</div>
+                    <div class="candidate-details">
+                        <h4>${c.name}</h4>
+                        <p>${c.party} • ${c.slogan.substring(0, 35)}</p>
                     </div>
-                    <button class="vote-btn" data-id="${candidate.id}" ${isDisabled ? 'disabled' : ''}>
-                        <i class="fas fa-poll"></i> ${buttonText}
-                    </button>
                 </div>
-            `;
+                <button class="vote-btn" data-id="${c.id}" ${disabled ? 'disabled' : ''}>
+                    <i class="fas fa-check-circle"></i> ${btnText}
+                </button>
+            </div>`;
         }).join('');
-        
-        // Attach event listeners if not voted
         if (!hasVoted) {
             document.querySelectorAll('.vote-btn:not(:disabled)').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const candidateId = parseInt(btn.getAttribute('data-id'));
-                    castVote(candidateId);
+                    const cid = parseInt(btn.getAttribute('data-id'));
+                    castVote(cid);
                 });
             });
         }
     }
-    
-    // Render results with progress bars
+
     function renderResults() {
         const container = document.getElementById('resultsLive');
         if (!container) return;
-        
-        const totalVotes = Object.values(voteData.votes).reduce((a, b) => a + b, 0);
-        const sortedCandidates = [...CANDIDATES].sort((a, b) => voteData.votes[b.id] - voteData.votes[a.id]);
-        
-        let resultsHtml = `<div style="margin-bottom: 1rem;"><i class="fas fa-users"></i> <strong>Total votes cast:</strong> ${totalVotes}</div>`;
-        
-        sortedCandidates.forEach(candidate => {
-            const voteCount = voteData.votes[candidate.id] || 0;
-            const percentage = totalVotes === 0 ? 0 : ((voteCount / totalVotes) * 100).toFixed(1);
-            resultsHtml += `
-                <div class="stat-item">
-                    <div class="stat-name">
-                        <strong>${candidate.name}</strong><br><span style="font-size: 0.7rem;">${candidate.party}</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-fill" style="width: ${percentage}%;"></div>
-                    </div>
-                    <div class="stat-votes">${voteCount} votes</div>
-                </div>
-                <div style="font-size: 0.7rem; text-align: right; margin-top: -8px; margin-bottom: 8px; color:#547c97;">${percentage}%</div>
-            `;
+        const totalVotes = Object.values(electionState.votes).reduce((a,b)=>a+b,0);
+        const sorted = [...CANDIDATES].sort((a,b)=> (electionState.votes[b.id]||0) - (electionState.votes[a.id]||0));
+        let html = `<div><i class="fas fa-users"></i> <strong>कूल मतदान:</strong> ${totalVotes}</div>`;
+        sorted.forEach(c => {
+            const votes = electionState.votes[c.id] || 0;
+            const percent = totalVotes === 0 ? 0 : ((votes/totalVotes)*100).toFixed(1);
+            html += `
+            <div class="stat-item">
+                <div class="stat-name"><strong>${c.name}</strong><br><span style="font-size:0.65rem;">${c.party}</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width: ${percent}%;"></div></div>
+                <div class="stat-votes">${votes} मत</div>
+            </div>
+            <div style="font-size:0.7rem; text-align:right; margin-top:-6px; margin-bottom:6px;">${percent}%</div>`;
         });
-        
-        if (totalVotes === 0) {
-            resultsHtml += `<div class="total-votes"><i class="fas fa-chart-line"></i> No votes yet — be the first!</div>`;
-        } else {
-            let maxVotes = -1;
-            let winners = [];
-            CANDIDATES.forEach(c => {
-                if (voteData.votes[c.id] > maxVotes) {
-                    maxVotes = voteData.votes[c.id];
-                    winners = [c];
-                } else if (voteData.votes[c.id] === maxVotes && maxVotes !== -1) {
-                    winners.push(c);
-                }
-            });
-            if (winners.length === 1) {
-                resultsHtml += `<div class="total-votes"><i class="fas fa-trophy"></i> Current leader: ${winners[0].name} with ${maxVotes} vote(s)</div>`;
-            } else if (maxVotes > 0 && winners.length > 1) {
-                resultsHtml += `<div class="total-votes"><i class="fas fa-handshake"></i> Tie between ${winners.map(w => w.name).join(", ")}</div>`;
-            }
+        if(totalVotes === 0) html += `<div class="total-votes"><i class="fas fa-chart-line"></i> हालसम्म कुनै मत छैन । पहिलो मतदाता बन्नुहोस्!</div>`;
+        else {
+            let maxVotes = -1, winners = [];
+            CANDIDATES.forEach(c => { if((electionState.votes[c.id]||0) > maxVotes){ maxVotes = electionState.votes[c.id]; winners = [c]; } else if((electionState.votes[c.id]||0) === maxVotes) winners.push(c); });
+            if(winners.length === 1) html += `<div class="total-votes"><i class="fas fa-trophy"></i> हालको अग्रणी: ${winners[0].name} (${maxVotes} मत)</div>`;
+            else if(maxVotes > 0) html += `<div class="total-votes"><i class="fas fa-handshake"></i> बराबरी: ${winners.map(w=>w.name).join(", ")}</div>`;
         }
-        
-        container.innerHTML = resultsHtml;
+        container.innerHTML = html;
     }
-    
-    // Update voter panel UI
+
     function updateUIForSession() {
-        const voterNameSpan = document.getElementById('voterName');
-        const voterIdSpan = document.getElementById('voterIdDisplay');
-        const voteStatusSpan = document.getElementById('voteStatusMsg');
-        
+        const nameSpan = document.getElementById('voterName');
+        const idSpan = document.getElementById('voterIdDisplay');
+        const statusSpan = document.getElementById('voteStatusMsg');
         if (currentSession) {
-            voterNameSpan.textContent = currentSession.voterName;
-            voterIdSpan.innerHTML = `<i class="fas fa-fingerprint"></i> ID: ${currentSession.voterId}`;
-            
+            nameSpan.textContent = currentSession.fullName;
+            const maskedNid = currentSession.nationalId.slice(0,4)+"****"+currentSession.nationalId.slice(-3);
+            idSpan.innerHTML = `<i class="fas fa-id-card"></i> NID: ${maskedNid} | ID: ${currentSession.voterId.slice(-6)}`;
             if (currentSession.hasVoted) {
-                const votedCandidate = CANDIDATES.find(c => c.id === currentSession.votedFor);
-                const candidateName = votedCandidate ? votedCandidate.name : 'unknown';
-                voteStatusSpan.innerHTML = `<i class="fas fa-check-double"></i> Voted for: ${candidateName}`;
-                voteStatusSpan.style.background = "#e0f2fe";
-                voteStatusSpan.style.color = "#0c4e6e";
+                const votedCandidate = CANDIDATES.find(c=>c.id === currentSession.votedFor);
+                statusSpan.innerHTML = `<i class="fas fa-check-double"></i> मतदान भयो : ${votedCandidate ? votedCandidate.name : 'सफल'}`;
+                statusSpan.style.background = "#e6f2ef";
             } else {
-                voteStatusSpan.innerHTML = `<i class="fas fa-check-circle"></i> Ready to vote — your voice matters`;
-                voteStatusSpan.style.background = "#ecfdf5";
-                voteStatusSpan.style.color = "#1e7e4a";
+                statusSpan.innerHTML = `<i class="fas fa-check-circle"></i> मतदानको लागि तयार - आवाज उठाउनुहोस्`;
+                statusSpan.style.background = "#fef1e0";
             }
         } else {
-            voterNameSpan.textContent = 'Not registered';
-            voterIdSpan.innerHTML = `<i class="fas fa-fingerprint"></i> Not registered`;
-            voteStatusSpan.innerHTML = `<i class="fas fa-info-circle"></i> Register to vote`;
-            voteStatusSpan.style.background = "#ecfdf5";
-            voteStatusSpan.style.color = "#1e7e4a";
+            nameSpan.textContent = "दर्ता छैन";
+            idSpan.innerHTML = `<i class="fas fa-fingerprint"></i> कृपया दर्ता गर्नुहोस्`;
+            statusSpan.innerHTML = `<i class="fas fa-info-circle"></i> दर्ता गर्नुहोस् र मतदान गर्नुहोस्`;
         }
     }
-    
-    // Modal handling
-    function showRegistrationModal() {
-        const modal = document.getElementById('registrationModal');
-        if (modal) modal.style.display = 'flex';
-    }
-    
-    function hideRegistrationModal() {
-        const modal = document.getElementById('registrationModal');
-        if (modal) modal.style.display = 'none';
-    }
-    
-    // Toast notification
-    function showToast(message, isError = false) {
+
+    function showRegistrationModal() { document.getElementById('registrationModal').style.display = 'flex'; }
+    function hideRegistrationModal() { document.getElementById('registrationModal').style.display = 'none'; }
+
+    function showToast(msg, isErr=false) {
         const toast = document.getElementById('notificationToast');
         const toastMsg = document.getElementById('toastMessage');
-        toastMsg.innerText = message;
+        toastMsg.innerText = msg;
         toast.classList.add('show');
-        toast.style.background = isError ? '#b33b2c' : '#1f3b4c';
-        setTimeout(() => toast.classList.remove('show'), 3000);
+        toast.style.background = isErr ? '#b33b2c' : '#1f5738';
+        setTimeout(()=>toast.classList.remove('show'), 3200);
     }
-    
-    // Simple confetti effect
-    function triggerConfetti() {
-        const colors = ['#1e3c72', '#2c7da0', '#4caf50', '#ffc107'];
-        for (let i = 0; i < 30; i++) {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'fixed';
-            confetti.style.width = '8px';
-            confetti.style.height = '8px';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.left = Math.random() * window.innerWidth + 'px';
-            confetti.style.top = '-10px';
-            confetti.style.borderRadius = '50%';
-            confetti.style.pointerEvents = 'none';
-            confetti.style.zIndex = '9999';
-            confetti.style.opacity = '0.8';
-            document.body.appendChild(confetti);
-            
-            const animation = confetti.animate([
-                { transform: 'translateY(0px) rotate(0deg)', opacity: 0.8 },
-                { transform: `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-            ], {
-                duration: 1500 + Math.random() * 1000,
-                easing: 'cubic-bezier(0.2, 0.9, 0.4, 1)'
-            });
-            
-            animation.onfinish = () => confetti.remove();
+
+    function triggerConfettiNepal() {
+        const colors = ['#dc143c', '#003893', '#f4c542', '#2e7d32'];
+        for(let i=0;i<40;i++) {
+            const conf = document.createElement('div');
+            conf.style.position = 'fixed';
+            conf.style.width = '9px';
+            conf.style.height = '9px';
+            conf.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+            conf.style.left = Math.random() * window.innerWidth + 'px';
+            conf.style.top = '-15px';
+            conf.style.borderRadius = '50%';
+            conf.style.pointerEvents = 'none';
+            conf.style.zIndex = '9999';
+            document.body.appendChild(conf);
+            const anim = conf.animate([{ transform: 'translateY(0px) rotate(0deg)', opacity: 0.9 },{ transform: `translateY(${window.innerHeight+30}px) rotate(${Math.random()*360}deg)`, opacity: 0 }], { duration: 1500+Math.random()*800, easing: 'cubic-bezier(0.2,0.8,0.4,1)' });
+            anim.onfinish = () => conf.remove();
         }
     }
-    
-    // Initialize the application
+
     function init() {
         loadPersistedData();
-        
-        // Check if session exists and is valid
-        if (currentSession && new Date(currentSession.expiresAt) >= new Date()) {
-            // Verify voter hasn't voted in persisted data but session says otherwise
-            if (voteData.voters[currentSession.voterId] && !currentSession.hasVoted) {
-                currentSession.hasVoted = true;
-                currentSession.votedFor = voteData.voters[currentSession.voterId];
-                persistSession();
-            }
-            updateUIForSession();
-            hideRegistrationModal();
-        } else {
+        if (currentSession && !electionState.citizensRegistry[currentSession.nationalId]) {
             currentSession = null;
             persistSession();
-            showRegistrationModal();
         }
-        
+        if (!currentSession) showRegistrationModal();
+        else {
+            const syncCitizen = electionState.citizensRegistry[currentSession.nationalId];
+            if(syncCitizen) { currentSession.hasVoted = syncCitizen.hasVoted; currentSession.votedFor = syncCitizen.votedCandidateId; persistSession(); }
+            hideRegistrationModal();
+        }
         renderCandidates();
         renderResults();
-        
-        // Register button event
+        updateUIForSession();
         document.getElementById('registerBtn').addEventListener('click', () => {
-            const nameInput = document.getElementById('voterNameInput');
-            const name = nameInput.value.trim();
-            if (name) {
-                registerVoter(name);
-            } else {
-                showToast('Please enter your name', true);
-            }
+            const name = document.getElementById('voterFullName').value.trim();
+            const nid = document.getElementById('nationalId').value.trim();
+            try { registerVoter(name, nid); } catch(e) { showToast(e.message, true); }
         });
-        
-        // Reset button with admin key prompt
         document.getElementById('resetElectionBtn').addEventListener('click', () => {
-            const adminKey = prompt('Enter admin key to reset election:');
-            if (adminKey) {
-                resetElection(adminKey);
-            }
+            const key = prompt('प्रशासक कुञ्जी प्रविष्ट गर्नुहोस्:');
+            if(key) resetElection(key);
         });
-        
-        // Allow Enter key in modal
-        document.getElementById('voterNameInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                document.getElementById('registerBtn').click();
-            }
-        });
-        
-        // Auto-refresh results every 2 seconds
-        setInterval(() => {
-            renderResults();
-        }, 2000);
+        document.getElementById('logoutBtn').addEventListener('click', () => { logoutVoter(); });
+        document.getElementById('voterFullName').addEventListener('keypress', e => { if(e.key==='Enter') document.getElementById('registerBtn').click(); });
+        document.getElementById('nationalId').addEventListener('keypress', e => { if(e.key==='Enter') document.getElementById('registerBtn').click(); });
+        setInterval(() => { renderResults(); }, 2000);
     }
-    
-    // Start the app
     init();
 </script>
 </body>
